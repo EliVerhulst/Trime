@@ -9,10 +9,7 @@ import android.view.View;
 import android.widget.TimePicker;
 import android.app.TimePickerDialog
 import android.app.DatePickerDialog
-import androidx.core.app.ComponentActivity.ExtraData
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
-import android.widget.Toast
+
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -23,6 +20,7 @@ class MainActivity : AppCompatActivity() {
     private val timePicker1: TimePicker? = null             // we maken een timepicker aan
     var datum = Date("01/01/2020")
     var uur = Date("01/01/2020")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -65,9 +63,12 @@ class MainActivity : AppCompatActivity() {
             timepicker.show()
 
         }
+
         confirm.setOnClickListener{
-            test1.text = formate.format(datum)
-            test2.text = timeFormat.format(uur)
+
+            val herinnering1 = Herinnering(datum, uur)
+            test1.text = formate.format(herinnering1.datum)
+            test2.text = timeFormat.format(herinnering1.uur)
         }
 
     }
