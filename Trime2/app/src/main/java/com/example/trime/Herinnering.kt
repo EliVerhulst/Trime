@@ -9,6 +9,7 @@ import android.widget.Button
 class Herinnering(val datum: Date, var uur: Date) {
     fun berekenDatum(datum:Date , uur:Date){
         val now = Calendar.getInstance();
+        //wies gei
 
 
 

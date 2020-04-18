@@ -17,7 +17,7 @@ import java.util.*
 class MainActivity : AppCompatActivity() {
     var timeFormat = SimpleDateFormat("HH:mm")       //zet het standaardformaat voor een datum
     var formate = SimpleDateFormat("dd MMM, YYYY")   //zet het standaardformaat voor tijd
-    
+
     private val timePicker1: TimePicker? = null             // we maken een timepicker aan
     var datum = Date("01/01/2020")
     var uur = Date("01/01/2020")
