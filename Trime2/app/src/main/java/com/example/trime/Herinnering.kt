@@ -1,19 +1,13 @@
 package com.example.trime
 import android.widget.TextView
-import java.time.LocalDate
+import java.time.LocalDateTime
 import java.util.*
 import android.os.Bundle
 import android.widget.Button
+import java.time.*
 
 
 class Herinnering(val datum: Date, var uur: Date) {
-    fun berekenDatum(datum:Date , uur:Date){
-        val now = Calendar.getInstance();
-        //wies gei
-
-
-
-    }
 
 
 }

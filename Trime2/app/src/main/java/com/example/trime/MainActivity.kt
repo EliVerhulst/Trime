@@ -11,12 +11,15 @@ import android.app.TimePickerDialog
 import android.app.DatePickerDialog
 
 import java.text.SimpleDateFormat
+import java.time.Duration
+import java.time.LocalDateTime
+import java.time.temporal.ChronoUnit
 import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
     var timeFormat = SimpleDateFormat("HH:mm")       //zet het standaardformaat voor een datum
-    var formate = SimpleDateFormat("dd MMM, YYYY")   //zet het standaardformaat voor tijd
+    var formate = SimpleDateFormat("YYYY-MM-dd")   //zet het standaardformaat voor tijd
 
     private val timePicker1: TimePicker? = null             // we maken een timepicker aan
     var datum = Date("01/01/2020")
@@ -32,6 +35,16 @@ class MainActivity : AppCompatActivity() {
         timeButton.setOnClickListener{              //onclicklistener initieren: iets doen wanneer er op de knop gedrukt wordt
             val now = Calendar.getInstance();       // steken de huidige tijd in een variabele
 
+            val timepicker = TimePickerDialog(this, TimePickerDialog.OnTimeSetListener{view, hourOfDay, minute ->
+                val selectedTime = Calendar.getInstance()
+                selectedTime.set(Calendar.HOUR_OF_DAY,hourOfDay)
+                selectedTime.set(Calendar.MINUTE, minute)
+                val time = (selectedTime.time)
+                uur = time
+
+            },
+                now.get(Calendar.HOUR_OF_DAY),now.get(Calendar.MINUTE),true)
+            timepicker.show()
             val datepicker = DatePickerDialog(this, DatePickerDialog.OnDateSetListener{view, year, month, dayOfMonth ->
                 val selectedDate = Calendar.getInstance()
                 selectedDate.set(Calendar.YEAR,year)
@@ -52,16 +65,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }catch (e:Exception){
                 e.printStackTrace()}
-            val timepicker = TimePickerDialog(this, TimePickerDialog.OnTimeSetListener{view, hourOfDay, minute ->
-                val selectedTime = Calendar.getInstance()
-                selectedTime.set(Calendar.HOUR_OF_DAY,hourOfDay)
-                selectedTime.set(Calendar.MINUTE, minute)
-                val time = (selectedTime.time)
-                uur = time
 
-            },
-                    now.get(Calendar.HOUR_OF_DAY),now.get(Calendar.MINUTE),true)
-            timepicker.show()
 
         }
 
@@ -70,6 +74,14 @@ class MainActivity : AppCompatActivity() {
             val herinnering1 = Herinnering(datum, uur)
             test1.text = formate.format(herinnering1.datum)
             test2.text = timeFormat.format(herinnering1.uur)
+            val now = Calendar.getInstance();
+            var koppel = formate.format(herinnering1.datum)
+            koppel = koppel +"T" + timeFormat.format(herinnering1.uur)+":00.0000"
+           val date1 = LocalDateTime.parse(koppel)
+            test1.text = koppel
+            val date2 = LocalDateTime.now()
+            val difference = ChronoUnit.SECONDS.between(date2, date1)
+            test2.text = difference.toString()
         }
 
     }
