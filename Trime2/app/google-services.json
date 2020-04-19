@@ -1,42 +1,34 @@
 {
   "project_info": {
-    "project_number": "922583954125",
-    "firebase_url": "https://trime-10725.firebaseio.com",
-    "project_id": "trime-10725",
-    "storage_bucket": "trime-10725.appspot.com"
+    "project_number": "608914596235",
+    "firebase_url": "https://trime-bf2dd.firebaseio.com",
+    "project_id": "trime-bf2dd",
+    "storage_bucket": "trime-bf2dd.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:922583954125:android:2c2aefcbdc76a37c7faf84",
+        "mobilesdk_app_id": "1:608914596235:android:08b80dbc84759eadf44f8e",
         "android_client_info": {
           "package_name": "com.example.trime"
         }
       },
       "oauth_client": [
         {
-          "client_id": "922583954125-s42uqm80hpjt6usut1t6cfgb342r0oka.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.trime",
-            "certificate_hash": "b121ffdc5cd9bd5957ff123f25b5db7faaed9de1"
-          }
-        },
-        {
-          "client_id": "922583954125-hstjsevua36m3e0fbhr3kho0uuvqp03a.apps.googleusercontent.com",
+          "client_id": "608914596235-b3ieij8hfvirfltsfc9j1nk1j5ih1ut0.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAtzIRWN0UevM9rkpnd9rhbO6PZMtuIhao"
+          "current_key": "AIzaSyAj1sXxHeqZzj5JowCTSuWEHJbRnn6qTUg"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "922583954125-hstjsevua36m3e0fbhr3kho0uuvqp03a.apps.googleusercontent.com",
+              "client_id": "608914596235-b3ieij8hfvirfltsfc9j1nk1j5ih1ut0.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
