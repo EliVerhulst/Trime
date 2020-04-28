@@ -47,6 +47,7 @@ class MainActivity : AppCompatActivity() {
 
 
         val confirm = findViewById<Button>(R.id.confirm);
+        val reset = findViewById<Button>(R.id.Reset)
         val test1 = findViewById<TextView>(R.id.Test1);
         val test2 = findViewById<TextView>(R.id.Test2);
 
@@ -107,6 +108,12 @@ class MainActivity : AppCompatActivity() {
             val pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
             Log.d("MainActivity", " Create : " + Date().toString())
             alarmManager.setExact(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+ second, pendingIntent)
+        }
+        reset.setOnClickListener {
+            val intent = Intent(context, Receiver::class.java)
+            val pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+            Log.d("MainActivity", " Cancel : " + Date().toString())
+            alarmManager.cancel(pendingIntent)
         }
 
 
