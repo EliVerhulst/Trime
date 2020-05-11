@@ -8,6 +8,6 @@ import java.time.*
 
 
 class Herinnering(val datum: Date, var uur: Date) {
-
+public var test = false
 
 }

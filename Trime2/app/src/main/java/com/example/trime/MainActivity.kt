@@ -1,6 +1,7 @@
 package com.example.trime
 
 
+import android.app.*
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
@@ -8,8 +9,6 @@ import androidx.appcompat.app.AppCompatActivity
 import java.time.LocalDate
 import android.view.View;
 import android.widget.TimePicker;
-import android.app.TimePickerDialog
-import android.app.DatePickerDialog
 import android.content.DialogInterface
 import androidx.appcompat.app.AlertDialog
 import java.text.SimpleDateFormat
@@ -17,12 +16,14 @@ import java.time.Duration
 import java.time.LocalDateTime
 import java.time.temporal.ChronoUnit
 import java.util.*
-import android.app.AlarmManager
-import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.util.Log
+import androidx.core.app.NotificationCompat
+import androidx.core.content.ContextCompat.getSystemService
 
 class MainActivity : AppCompatActivity() {
     private val mNotificationTime = Calendar.getInstance().timeInMillis + 5000 //Set after 5 seconds from the current time.
@@ -36,7 +37,12 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var context: Context
     lateinit var alarmManager: AlarmManager
-
+    lateinit var notificationManager : NotificationManager
+    lateinit var notificationChannel: NotificationChannel
+    lateinit var builder : Notification.Builder
+    private val channelID = "package com.example.trime"
+    private val description =  "Uw trein komt aan"
+    public var test5 = false
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -50,6 +56,8 @@ class MainActivity : AppCompatActivity() {
         val reset = findViewById<Button>(R.id.Reset)
         val test1 = findViewById<TextView>(R.id.Test1);
         val test2 = findViewById<TextView>(R.id.Test2);
+
+
 
 
 
@@ -119,11 +127,62 @@ class MainActivity : AppCompatActivity() {
 
 
     }
-    class Receiver : BroadcastReceiver() {
-        override fun onReceive(context: Context?, intent: Intent?) {
-            //alles dat je hier typt gebeurt of het aangeduidde moment
-            Log.d("MainActivity", " Receiver : " + Date().toString())
-        }
+
+    fun sendnotification(){
+        val intent = Intent(this,LauncherActivity::class.java)
+        val pendingIntent = PendingIntent.getActivity(this,0,intent,PendingIntent.FLAG_UPDATE_CURRENT)
+
+        notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        notificationChannel = NotificationChannel(channelID,description,NotificationManager.IMPORTANCE_HIGH)
+        notificationChannel.enableLights(true)
+        notificationChannel.lightColor = Color.GREEN
+        notificationChannel.enableVibration(true)
+        notificationManager.createNotificationChannel(notificationChannel)
+
+        builder = Notification.Builder(this,channelID)
+            .setContentTitle("testcontenttitle")
+            .setContentText("test notification text")
+            .setSmallIcon(R.drawable.ic_launcher_round)
+            .setLargeIcon(BitmapFactory.decodeResource(this.resources,R.drawable.ic_launcher))
+            .setContentIntent(pendingIntent)
+
+        notificationManager.notify(1234,builder.build())
+    }}
+class Receiver : BroadcastReceiver() {
+    override fun onReceive(context: Context?, intent: Intent?) {
+
+        lateinit var context: Context
+        lateinit var alarmManager: AlarmManager
+        lateinit var notificationManager : NotificationManager
+        lateinit var notificationChannel: NotificationChannel
+        lateinit var builder : Notification.Builder
+        val channelID = "package com.example.trime"
+        val description =  "Uw trein komt aan"
+        var test5 = false
+
+
+        val intent = Intent(MainActivity(), LauncherActivity::class.java)
+        val pendingIntent = PendingIntent.getActivity(MainActivity(),0,intent, PendingIntent.FLAG_UPDATE_CURRENT)
+
+        notificationManager = MainActivity().context.getSystemService(NOTIFICATION) as NotificationManager
+        notificationChannel = NotificationChannel(channelID,description, NotificationManager.IMPORTANCE_HIGH)
+        notificationChannel.enableLights(true)
+        notificationChannel.lightColor = Color.GREEN
+        notificationChannel.enableVibration(true)
+        notificationManager.createNotificationChannel(notificationChannel)
+
+        builder = Notification.Builder(MainActivity(),channelID)
+            .setContentTitle("testcontenttitle")
+            .setContentText("test notification text")
+            .setSmallIcon(R.drawable.ic_launcher_round)
+            .setLargeIcon(BitmapFactory.decodeResource(MainActivity().resources,R.drawable.ic_launcher))
+            .setContentIntent(pendingIntent)
+
+        notificationManager.notify(1234,builder.build())
+
+
+        Log.d("MainActivity", " Receiver : " + Date().toString())
     }
-    }
+}
+
 
