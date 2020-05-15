@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
             }
         });
     }
+    //Datepicker
     private void showDatePickerDialog(){
         DatePickerDialog datePickerDialog = new DatePickerDialog(
                 this,
@@ -89,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         );
         datePickerDialog.show();
     }
-
+    //timepicker
     private void showTimePickerDialog(){
         TimePickerDialog timePickerDialog = new TimePickerDialog(
                 this,
@@ -114,6 +115,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
     }
 
     @Override
+    //hier wordt de datum uit de datepicker gehaald
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         String date = "day/month/year: " + dayOfMonth + "/" + (month +1 )+ "/"+ year;
 
@@ -124,6 +126,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
     }
 
     @Override
+    //hier wordt de tijd uit de timepicker gehaald
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         String time = "Hour:minutes: " + hourOfDay + ":" + minute;
 
